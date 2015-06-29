@@ -13,11 +13,11 @@
         <version>1.0.0p1m1</version>
     </parent>
 
-    <artifactId>converters-plugin</artifactId>
+    <artifactId>data2wrappermap-converter</artifactId>
 
     <packaging>ejb</packaging>
 
-    <name>Converters DataBroker Plugin</name>
+    <name>Data2WrapperMap Converter DataBroker Plugin</name>
 
     <dependencies>
         <dependency>
@@ -38,10 +38,33 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.arjuna.dbplugins.converters</groupId>
-            <artifactId>data2wrappermap-converter</artifactId>
-            <version>1.0.0p1m1</version>
-            <scope>provided</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.arjuna.databroker</groupId>
+            <artifactId>data-core</artifactId>
+            <version>${version.com.arjuna.databroker}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.arjuna.databroker</groupId>
+            <artifactId>data-core-jee</artifactId>
+            <version>${version.com.arjuna.databroker}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.arjuna.dbutils.testsupport</groupId>
+            <artifactId>dataflownodes-dummy</artifactId>
+            <version>1.0.0p2m1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.arjuna.dbutils.testsupport</groupId>
+            <artifactId>dataflownodes-lifecycle</artifactId>
+            <version>1.0.0p2m1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

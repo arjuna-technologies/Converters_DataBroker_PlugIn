@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import com.arjuna.databroker.data.DataFlowNodeFactoryInventory;
+import com.arjuna.dplugins.converters.data2wrappermap.Data2WrapperMapDataProcessorFactory;
 
 @Startup
 @Singleton
@@ -20,18 +21,18 @@ public class ConvertersFactoriesSetup
     @PostConstruct
     public void setup()
     {
-//        Map<String, String> exampleConverterDataProcessorFactoryProperties = new HashMap<String, String>();
-//        exampleConverterDataProcessorFactoryProperties.put("Description", ExampleConverterDataProcessorFactory.DESCRIPTION);
+        Map<String, String> data2WrapperMapDataProcessorFactoryProperties = new HashMap<String, String>();
+        data2WrapperMapDataProcessorFactoryProperties.put("Description", Data2WrapperMapDataProcessorFactory.DESCRIPTION);
 
-//        ExampleConverterDataProcessorFactory exampleConverterDataProcessorFactory  = new ExampleConverterDataProcessorFactory("Example Convertor Data Processor Factory", exampleConverterDataProcessorFactoryProperties);
+        Data2WrapperMapDataProcessorFactory data2WrapperMapDataProcessorFactory = new Data2WrapperMapDataProcessorFactory("Data2WrapperMap Data Processor Factory", data2WrapperMapDataProcessorFactoryProperties);
 
-//        _dataFlowNodeFactoryInventory.addDataFlowNodeFactory(exampleConverterDataProcessorFactory);
+        _dataFlowNodeFactoryInventory.addDataFlowNodeFactory(data2WrapperMapDataProcessorFactory);
     }
 
     @PreDestroy
     public void cleanup()
     {
-//        _dataFlowNodeFactoryInventory.removeDataFlowNodeFactory("Example Converter Data Processor Factory");
+        _dataFlowNodeFactoryInventory.removeDataFlowNodeFactory("Data2WrapperMap Data Processor Factory");
     }
 
     @EJB(lookup="java:global/databroker/data-core-jee/DataFlowNodeFactoryInventory")

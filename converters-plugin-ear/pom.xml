@@ -22,9 +22,15 @@
     <dependencies>
         <dependency>
             <groupId>com.arjuna.dbplugins.converters</groupId>
-            <artifactId>data2mapwrapper-converter</artifactId>
+            <artifactId>data2wrappermap-converter</artifactId>
             <version>1.0.0p1m1</version>
             <scope>provided</scope>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>com.arjuna.dbplugins.converters</groupId>
+            <artifactId>converters-plugin</artifactId>
+            <version>1.0.0p1m1</version>
             <type>ejb</type>
         </dependency>
     </dependencies>
@@ -39,7 +45,11 @@
                     <modules>
                         <ejbModule>
                             <groupId>com.arjuna.dbplugins.converters</groupId>
-                            <artifactId>data2mapwrapper-converter</artifactId>
+                            <artifactId>data2wrappermap-converter</artifactId>
+                        </ejbModule>
+                        <ejbModule>
+                            <groupId>com.arjuna.dbplugins.converters</groupId>
+                            <artifactId>converters-plugin</artifactId>
                         </ejbModule>
                     </modules>
                 </configuration>

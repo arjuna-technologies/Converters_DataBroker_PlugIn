@@ -48,6 +48,7 @@
     <modules>
         <module>converters-plugin</module>
         <module>converters-plugin-ear</module>
+        <module>data2wrappermap-converter</module>
     </modules>
 
     <repositories>
