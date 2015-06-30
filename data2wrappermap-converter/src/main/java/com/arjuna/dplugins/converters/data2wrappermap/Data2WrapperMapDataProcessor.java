@@ -121,7 +121,7 @@ public class Data2WrapperMapDataProcessor implements DataProcessor
         wrapperMap.put("data", data);
         try
         {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
             String           dateString = dateFormat.format(new Date());
 
             wrapperMap.put("filename", _fileNamePrefix + dateString + _fileNamePostfix);
