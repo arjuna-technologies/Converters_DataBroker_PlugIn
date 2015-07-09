@@ -13,6 +13,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import com.arjuna.databroker.data.DataFlowNodeFactoryInventory;
 import com.arjuna.dplugins.converters.data2wrappermap.Data2WrapperMapDataProcessorFactory;
+import com.arjuna.dplugins.converters.data2wrappermap.Data2DirectWrapperMapDataProcessorFactory;
 
 @Startup
 @Singleton
@@ -24,15 +25,21 @@ public class ConvertersFactoriesSetup
         Map<String, String> data2WrapperMapDataProcessorFactoryProperties = new HashMap<String, String>();
         data2WrapperMapDataProcessorFactoryProperties.put("Description", Data2WrapperMapDataProcessorFactory.DESCRIPTION);
 
-        Data2WrapperMapDataProcessorFactory data2WrapperMapDataProcessorFactory = new Data2WrapperMapDataProcessorFactory("Data2WrapperMap Data Processor Factory", data2WrapperMapDataProcessorFactoryProperties);
+        Map<String, String> data2DirectWrapperMapDataProcessorFactoryProperties = new HashMap<String, String>();
+        data2DirectWrapperMapDataProcessorFactoryProperties.put("Description", Data2DirectWrapperMapDataProcessorFactory.DESCRIPTION);
+
+        Data2WrapperMapDataProcessorFactory       data2WrapperMapDataProcessorFactory       = new Data2WrapperMapDataProcessorFactory("Data2WrapperMap Data Processor Factory", data2WrapperMapDataProcessorFactoryProperties);
+        Data2DirectWrapperMapDataProcessorFactory data2DirectWrapperMapDataProcessorFactory = new Data2DirectWrapperMapDataProcessorFactory("Data2DirectWrapperMap Data Processor Factory", data2DirectWrapperMapDataProcessorFactoryProperties);
 
         _dataFlowNodeFactoryInventory.addDataFlowNodeFactory(data2WrapperMapDataProcessorFactory);
+        _dataFlowNodeFactoryInventory.addDataFlowNodeFactory(data2DirectWrapperMapDataProcessorFactory);
     }
 
     @PreDestroy
     public void cleanup()
     {
         _dataFlowNodeFactoryInventory.removeDataFlowNodeFactory("Data2WrapperMap Data Processor Factory");
+        _dataFlowNodeFactoryInventory.removeDataFlowNodeFactory("Data2DirectWrapperMap Data Processor Factory");
     }
 
     @EJB(lookup="java:global/databroker/data-core-jee/DataFlowNodeFactoryInventory")

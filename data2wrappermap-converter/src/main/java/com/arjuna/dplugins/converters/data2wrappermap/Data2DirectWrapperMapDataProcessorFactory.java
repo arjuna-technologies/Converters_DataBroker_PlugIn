@@ -18,11 +18,11 @@ import com.arjuna.databroker.data.InvalidPropertyException;
 import com.arjuna.databroker.data.MissingMetaPropertyException;
 import com.arjuna.databroker.data.MissingPropertyException;
 
-public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
+public class Data2DirectWrapperMapDataProcessorFactory implements DataFlowNodeFactory
 {
-    public static final String DESCRIPTION = "Creates data flow nodes which wraps a blob of data in a timestamped discriptive map object";
+    public static final String DESCRIPTION = "Creates data flow nodes which wraps a blob of data in a direct discriptive map object";
 
-    public Data2WrapperMapDataProcessorFactory(String name, Map<String, String> properties)
+    public Data2DirectWrapperMapDataProcessorFactory(String name, Map<String, String> properties)
     {
         _name       = name;
         _properties = properties;
@@ -62,12 +62,10 @@ public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
     {
         List<String> propertyNames = new LinkedList<String>();
 
-        propertyNames.add(Data2WrapperMapDataProcessor.FILENAMEPREFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.FILENAMEPOSTFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCENAMEPREFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCENAMEPOSTFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCEFORMAT_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCEDESCRIPTION_PROPERTYNAME);
+        propertyNames.add(Data2DirectWrapperMapDataProcessor.FILENAME_PROPERTYNAME);
+        propertyNames.add(Data2DirectWrapperMapDataProcessor.RESOURCENAME_PROPERTYNAME);
+        propertyNames.add(Data2DirectWrapperMapDataProcessor.RESOURCEFORMAT_PROPERTYNAME);
+        propertyNames.add(Data2DirectWrapperMapDataProcessor.RESOURCEDESCRIPTION_PROPERTYNAME);
 
         return propertyNames;
     }
@@ -77,8 +75,8 @@ public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
     public <T extends DataFlowNode> T createDataFlowNode(String name, Class<T> dataFlowNodeClass, Map<String, String> metaProperties, Map<String, String> properties)
         throws InvalidNameException, InvalidPropertyException, MissingPropertyException
     {
-        if (dataFlowNodeClass.isAssignableFrom(Data2WrapperMapDataProcessor.class))
-            return (T) new Data2WrapperMapDataProcessor(name, properties);
+        if (dataFlowNodeClass.isAssignableFrom(Data2DirectWrapperMapDataProcessor.class))
+            return (T) new Data2DirectWrapperMapDataProcessor(name, properties);
         else
             return null;
     }
