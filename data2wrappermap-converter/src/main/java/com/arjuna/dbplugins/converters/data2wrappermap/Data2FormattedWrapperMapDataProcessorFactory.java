@@ -2,7 +2,7 @@
  * Copyright (c) 2015, Arjuna Technologies Limited, Newcastle-upon-Tyne, England. All rights reserved.
  */
 
-package com.arjuna.dplugins.converters.data2wrappermap;
+package com.arjuna.dbplugins.converters.data2wrappermap;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -18,11 +18,11 @@ import com.arjuna.databroker.data.InvalidPropertyException;
 import com.arjuna.databroker.data.MissingMetaPropertyException;
 import com.arjuna.databroker.data.MissingPropertyException;
 
-public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
+public class Data2FormattedWrapperMapDataProcessorFactory implements DataFlowNodeFactory
 {
-    public static final String DESCRIPTION = "Creates data flow nodes which wraps a blob of data in a timestamped discriptive map object";
+    public static final String DESCRIPTION = "Creates data flow nodes which wraps a blob of data in a formatted discriptive map object";
 
-    public Data2WrapperMapDataProcessorFactory(String name, Map<String, String> properties)
+    public Data2FormattedWrapperMapDataProcessorFactory(String name, Map<String, String> properties)
     {
         _name       = name;
         _properties = properties;
@@ -62,12 +62,10 @@ public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
     {
         List<String> propertyNames = new LinkedList<String>();
 
-        propertyNames.add(Data2WrapperMapDataProcessor.FILENAMEPREFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.FILENAMEPOSTFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCENAMEPREFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCENAMEPOSTFIX_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCEFORMAT_PROPERTYNAME);
-        propertyNames.add(Data2WrapperMapDataProcessor.RESOURCEDESCRIPTION_PROPERTYNAME);
+        propertyNames.add(Data2FormattedWrapperMapDataProcessor.FILENAME_PROPERTYNAME);
+        propertyNames.add(Data2FormattedWrapperMapDataProcessor.RESOURCENAME_PROPERTYNAME);
+        propertyNames.add(Data2FormattedWrapperMapDataProcessor.RESOURCEFORMAT_PROPERTYNAME);
+        propertyNames.add(Data2FormattedWrapperMapDataProcessor.RESOURCEDESCRIPTION_PROPERTYNAME);
 
         return propertyNames;
     }
@@ -77,8 +75,8 @@ public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
     public <T extends DataFlowNode> T createDataFlowNode(String name, Class<T> dataFlowNodeClass, Map<String, String> metaProperties, Map<String, String> properties)
         throws InvalidNameException, InvalidPropertyException, MissingPropertyException
     {
-        if (dataFlowNodeClass.isAssignableFrom(Data2WrapperMapDataProcessor.class))
-            return (T) new Data2WrapperMapDataProcessor(name, properties);
+        if (dataFlowNodeClass.isAssignableFrom(Data2FormattedWrapperMapDataProcessor.class))
+            return (T) new Data2FormattedWrapperMapDataProcessor(name, properties);
         else
             return null;
     }

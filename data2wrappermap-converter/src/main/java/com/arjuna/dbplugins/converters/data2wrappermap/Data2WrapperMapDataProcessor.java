@@ -2,7 +2,7 @@
  * Copyright (c) 2015, Arjuna Technologies Limited, Newcastle-upon-Tyne, England. All rights reserved.
  */
 
-package com.arjuna.dplugins.converters.data2wrappermap;
+package com.arjuna.dbplugins.converters.data2wrappermap;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;

@@ -2,14 +2,17 @@
  * Copyright (c) 2015, Arjuna Technologies Limited, Newcastle-upon-Tyne, England. All rights reserved.
  */
 
-package com.arjuna.dplugins.converters.data2wrappermap;
+package com.arjuna.dbplugins.converters.data2wrappermap;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import com.arjuna.databroker.data.DataConsumer;
@@ -22,23 +25,23 @@ import com.arjuna.databroker.data.jee.annotation.PostConfig;
 import com.arjuna.databroker.data.jee.annotation.PostCreated;
 import com.arjuna.databroker.data.jee.annotation.PostRecovery;
 
-public class Data2DirectWrapperMapDataProcessor implements DataProcessor
+public class Data2FormattedWrapperMapDataProcessor implements DataProcessor
 {
-    private static final Logger logger = Logger.getLogger(Data2DirectWrapperMapDataProcessor.class.getName());
+    private static final Logger logger = Logger.getLogger(Data2FormattedWrapperMapDataProcessor.class.getName());
 
     public static final String FILENAME_PROPERTYNAME            = "File Name";
     public static final String RESOURCENAME_PROPERTYNAME        = "Resource Name";
     public static final String RESOURCEFORMAT_PROPERTYNAME      = "Resource Format";
     public static final String RESOURCEDESCRIPTION_PROPERTYNAME = "Resource Description";
 
-    public Data2DirectWrapperMapDataProcessor()
+    public Data2FormattedWrapperMapDataProcessor()
     {
-        logger.log(Level.FINE, "Data2DirectWrapperMapDataProcessor");
+        logger.log(Level.FINE, "Data2FormattedWrapperMapDataProcessor");
     }
 
-    public Data2DirectWrapperMapDataProcessor(String name, Map<String, String> properties)
+    public Data2FormattedWrapperMapDataProcessor(String name, Map<String, String> properties)
     {
-        logger.log(Level.FINE, "Data2DirectWrapperMapDataProcessor: " + name + ", " + properties);
+        logger.log(Level.FINE, "Data2FormattedWrapperMapDataProcessor: " + name + ", " + properties);
 
         _name       = name;
         _properties = properties;
@@ -115,10 +118,27 @@ public class Data2DirectWrapperMapDataProcessor implements DataProcessor
         wrapperMap.put("data", data);
         try
         {
-            wrapperMap.put("filename", _fileName);
-            wrapperMap.put("resourcename", _resourceName);
+            String           uuidString     = UUID.randomUUID().toString();
+            Date             date           = new Date();
+            SimpleDateFormat dateFormat     = new SimpleDateFormat("yyyyMMdd");
+            String           dateString     = dateFormat.format(date);
+            SimpleDateFormat timeFormat     = new SimpleDateFormat("HHmmss");
+            String           timeString     = timeFormat.format(date);
+            SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+            String           datetimeString = datetimeFormat.format(date);
+
+            String uuidRegex           = "\\$\\{uuid\\}";
+            String dateRegex           = "\\$\\{date\\}";
+            String timeRegex           = "\\$\\{time\\}";
+            String datetimeRegex       = "\\$\\{datetime\\}";
+            String fileName            = _fileName.replaceAll(uuidRegex, uuidString).replaceAll(dateRegex, dateString).replaceAll(timeRegex,timeString).replaceAll(datetimeRegex, datetimeString);
+            String resourceName        = _resourceName.replaceAll(uuidRegex, uuidString).replaceAll(dateRegex, dateString).replaceAll(timeRegex,timeString).replaceAll(datetimeRegex, datetimeString);
+            String resourceDescription = _resourceDescription.replaceAll(uuidRegex, uuidString).replaceAll(dateRegex, dateString).replaceAll(timeRegex,timeString).replaceAll(datetimeRegex, datetimeString);
+
+            wrapperMap.put("filename", fileName);
+            wrapperMap.put("resourcename", resourceName);
             wrapperMap.put("resourceformat", _resourceFormat);
-            wrapperMap.put("resourcedescription", _resourceDescription);
+            wrapperMap.put("resourcedescription", resourceDescription);
         }
         catch (Throwable throwable)
         {

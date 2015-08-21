@@ -2,7 +2,7 @@
  * Copyright (c) 2015, Arjuna Technologies Limited, Newcastle-upon-Tyne, England. All rights reserved.
  */
 
-package com.arjuna.dplugins.converters;
+package com.arjuna.dbplugins.converters;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,9 @@ import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import com.arjuna.databroker.data.DataFlowNodeFactoryInventory;
-import com.arjuna.dplugins.converters.data2wrappermap.Data2FormattedWrapperMapDataProcessorFactory;
-import com.arjuna.dplugins.converters.data2wrappermap.Data2WrapperMapDataProcessorFactory;
-import com.arjuna.dplugins.converters.data2wrappermap.Data2DirectWrapperMapDataProcessorFactory;
+import com.arjuna.dbplugins.converters.data2wrappermap.Data2DirectWrapperMapDataProcessorFactory;
+import com.arjuna.dbplugins.converters.data2wrappermap.Data2FormattedWrapperMapDataProcessorFactory;
+import com.arjuna.dbplugins.converters.data2wrappermap.Data2WrapperMapDataProcessorFactory;
 
 @Startup
 @Singleton
