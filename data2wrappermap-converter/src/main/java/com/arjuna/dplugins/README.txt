@@ -1,0 +1,1 @@
+Package name should be 'com.arjuna.dbplugins', added for backward compatibility.
