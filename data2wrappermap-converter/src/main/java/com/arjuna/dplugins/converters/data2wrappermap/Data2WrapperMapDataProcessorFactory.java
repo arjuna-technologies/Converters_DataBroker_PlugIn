@@ -19,6 +19,7 @@ import com.arjuna.databroker.data.MissingMetaPropertyException;
 import com.arjuna.databroker.data.MissingPropertyException;
 import com.arjuna.dbplugins.converters.data2wrappermap.Data2WrapperMapDataProcessor;
 
+@Deprecated
 public class Data2WrapperMapDataProcessorFactory implements DataFlowNodeFactory
 {
     public static final String DESCRIPTION = "Creates data flow nodes which wraps a blob of data in a timestamped discriptive map object";
